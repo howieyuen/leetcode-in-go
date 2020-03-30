@@ -72,3 +72,67 @@ type ListNode struct {
 	Val  int
 	Next *ListNode
 }
+
+/*
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	h1 := reverse(l1)
+	h2 := reverse(l2)
+	var temp *ListNode
+	var newHead *ListNode
+	up := 0
+	for {
+		if h1 == nil && h2 == nil && up == 0 {
+			break
+		}
+		newNode, newUp := add(h1, h2, up)
+		up = newUp
+		if temp != nil {
+			temp.Next = newNode
+		} else {
+			newHead = newNode
+		}
+		temp = newNode
+		if h1 != nil {
+			h1 = h1.Next
+		}
+		if h2 != nil {
+			h2 = h2.Next
+		}
+	}
+	return reverse(newHead)
+}
+
+func add(l1 *ListNode, l2 *ListNode, up int) (*ListNode, int) {
+	var res int
+	var newUp int
+	if l1 == nil && l2 == nil {
+		res = up
+		newUp = 0
+	} else if l1 == nil {
+		res = (l2.Val + up) % 10
+		newUp = (l2.Val + up) / 10
+	} else if l2 == nil {
+		res = (l1.Val + up) % 10
+		newUp = (l1.Val + up) / 10
+	} else {
+		res = (l1.Val + l2.Val + up) % 10
+		newUp = (l1.Val + l2.Val + up) / 10
+	}
+	return &ListNode{res, nil}, newUp
+}
+
+func reverse(head *ListNode) *ListNode {
+	var front *ListNode
+	var next *ListNode
+	for {
+		if head == nil {
+			break
+		}
+		next = head.Next
+		head.Next = front
+		front = head
+		head = next
+	}
+	return front
+}
+*/
