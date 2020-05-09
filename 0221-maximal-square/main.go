@@ -96,7 +96,81 @@ func maximalSquare2(matrix [][]byte) int {
 			maxEdge = max(maxEdge, min(maxWidth, maxHeight))
 		}
 	}
-	return maxEdge*maxEdge
+	return maxEdge * maxEdge
+}
+
+type uint128 struct {
+	data []uint8
+	size int
+}
+
+func (u *uint128) setBytes(buf []byte) {
+	for i := u.size - len(buf); i < u.size; i++ {
+		u.data[i] = buf[i] - '0'
+	}
+}
+
+func (u *uint128) and(v *uint128) {
+	for i := 0; i < u.size; i++ {
+		u.data[i] &= v.data[i]
+	}
+}
+
+func (u *uint128) deepCopy() *uint128 {
+	data := make([]uint8, u.size)
+	copy(data, u.data)
+	return &uint128{
+		data: data,
+		size: u.size,
+	}
+}
+
+func (u *uint128) cmp(v *uint128) int {
+	for i := 0; i < u.size; i++ {
+		if u.data[i] > v.data[i] {
+			return 1
+		} else if u.data[i] < v.data[i] {
+			return -1
+		}
+	}
+	return 0
+}
+
+func (u *uint128) unsignedMoveLeft(n int) *uint128 {
+	v := u.deepCopy()
+	for i := 0; i < v.size-n; i++ {
+		v.data[i] = v.data[i+1]
+	}
+	for i := v.size - n; i < v.size; i++ {
+		v.data[i] = 0
+	}
+	return v
+}
+
+func maximalSquare3(matrix [][]byte) int {
+	if len(matrix) == 0 || len(matrix[0]) == 0 {
+		return 0
+	}
+	rows, cols := len(matrix), len(matrix[0])
+	dp := make([]*uint128, rows)
+	for i := range matrix {
+		dp[i] = &uint128{data: make([]uint8, cols), size: cols}
+		dp[i].setBytes(matrix[i])
+	}
+	maxEdge := 0
+	var zero = &uint128{data: make([]uint8, cols), size: cols}
+	for i, andValue := range dp {
+		for j, b := range dp[i:] {
+			maxHeight := j + 1
+			andValue.and(b)
+			maxWidth := 0
+			for tmp := andValue.deepCopy(); tmp.cmp(zero) == 1; tmp.and(tmp.unsignedMoveLeft(1)) {
+				maxWidth++
+			}
+			maxEdge = max(maxEdge, min(maxWidth, maxHeight))
+		}
+	}
+	return maxEdge * maxEdge
 }
 
 func min(a, b int) int {

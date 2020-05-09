@@ -25,7 +25,7 @@ func Test_maximalSquare(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := maximalSquare2(tt.args.matrix); got != tt.want {
+			if got := maximalSquare3(tt.args.matrix); got != tt.want {
 				t.Errorf("maximalSquare() = %v, want %v", got, tt.want)
 			}
 		})
