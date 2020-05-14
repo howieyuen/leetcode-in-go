@@ -1,4 +1,4 @@
-package _578_lcof_interview11
+package _578_lcof_11
 
 import (
 	"testing"

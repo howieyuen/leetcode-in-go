@@ -1,4 +1,4 @@
-package _573_lcof_interview06
+package _573_lcof_06
 
 import (
 	"reflect"

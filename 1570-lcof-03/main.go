@@ -1,4 +1,4 @@
-package _570_lcof_interview03
+package _570_lcof_03
 
 import (
 	"sort"

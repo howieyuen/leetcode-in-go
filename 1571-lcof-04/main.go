@@ -1,4 +1,4 @@
-package _571_lcof_interview04
+package _571_lcof_04
 
 func findNumberIn2DArray(matrix [][]int, target int) bool {
 	if len(matrix) == 0 || len(matrix[0]) == 0 {
