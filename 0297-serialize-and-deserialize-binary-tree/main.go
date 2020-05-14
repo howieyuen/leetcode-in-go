@@ -1,12 +1,72 @@
 package _297_serialize_and_deserialize_binary_tree
 
 import (
+	"container/list"
 	"fmt"
 	"strconv"
 	"strings"
 )
 
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+type Codec struct {
+}
+
+func Constructor() Codec {
+	return Codec{}
+}
+
+// Serializes a tree to a single string.
+func (c *Codec) serialize(root *TreeNode) string {
+	if root == nil {
+		return ""
+	}
+	return serialize(root)
+}
+
 func serialize(root *TreeNode) string {
+	if root == nil {
+		return "null,"
+	}
+	str := strconv.Itoa(root.Val) + ","
+	str += serialize(root.Left)
+	str += serialize(root.Right)
+	return str
+}
+
+// Deserialize your encoded data to tree.
+func (c *Codec) deserialize(data string) *TreeNode {
+	if data == "" {
+		return nil
+	}
+	values := strings.Split(data, ",")
+	queue := list.New()
+	for i := range values {
+		queue.PushBack(values[i])
+	}
+	return buildTree(queue)
+}
+
+func buildTree(queue *list.List) *TreeNode {
+	if queue.Len() == 0 {
+		return nil
+	}
+	str := queue.Remove(queue.Front()).(string)
+	if str == "null" {
+		return nil
+	}
+	val, _ := strconv.Atoi(str)
+	root := &TreeNode{Val: val}
+	root.Left = buildTree(queue)
+	root.Right = buildTree(queue)
+	return root
+}
+
+func (c *Codec) serialize1(root *TreeNode) string {
 	if root == nil {
 		return ""
 	}
@@ -33,7 +93,10 @@ func trimRightNulls(data []string, target string) []string {
 	return data[:right+1]
 }
 
-func deserialize(data string) *TreeNode {
+func (c *Codec) deserialize1(data string) *TreeNode {
+	if data == "" {
+		return nil
+	}
 	vals := strings.Split(data[1:len(data)-1], ",")
 	if len(vals) == 0 {
 		return nil
@@ -64,10 +127,4 @@ func deserialize(data string) *TreeNode {
 		}
 	}
 	return root
-}
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
 }
