@@ -1,4 +1,4 @@
-package _575_lcof_09
+package _576_lcof_09
 
 type CQueue struct {
 	input  stack

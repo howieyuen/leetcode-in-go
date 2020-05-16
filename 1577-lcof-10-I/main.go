@@ -1,13 +1,13 @@
-package _577_lcof_10_II
+package _577_lcof_10_I
 
-func numWays(n int) int {
+func fib(n int) int {
 	if n == 0 {
-		return 1
+		return 0
 	}
 	if n == 1 {
 		return 1
 	}
-	a, b := 1, 1
+	a, b := 0, 1
 	var ans int
 	for i := 2; i <= n; i++ {
 		ans = (a + b) % (1e9 + 7)

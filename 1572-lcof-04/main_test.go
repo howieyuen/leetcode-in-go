@@ -1,4 +1,4 @@
-package _571_lcof_04
+package _572_lcof_04
 
 import (
 	"testing"

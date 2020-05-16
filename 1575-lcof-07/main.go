@@ -1,4 +1,4 @@
-package _574_lcof_07
+package _575_lcof_07
 
 func buildTree(preorder []int, inorder []int) *TreeNode {
 	splits := make(map[int]int, len(inorder))
