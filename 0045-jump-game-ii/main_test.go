@@ -13,7 +13,7 @@ func Test_jump(t *testing.T) {
 		args args
 		want int
 	}{
-		{args: args{[]int{2, 3, 1, 1, 4}}, want: 2},
+		{args: args{nums: []int{2, 3, 1, 1, 4}}, want: 2},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
