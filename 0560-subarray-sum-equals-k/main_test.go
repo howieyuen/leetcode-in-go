@@ -25,6 +25,9 @@ func Test_subarraySum(t *testing.T) {
 			if got := subarraySum1(tt.args.nums, tt.args.k); got != tt.want {
 				t.Errorf("subarraySum()1 = %v, want %v", got, tt.want)
 			}
+			if got := subarraySum2(tt.args.nums, tt.args.k); got != tt.want {
+				t.Errorf("subarraySum()2 = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }

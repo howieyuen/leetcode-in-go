@@ -49,3 +49,22 @@ func subarraySum1(nums []int, k int) int {
 	}
 	return ans
 }
+
+func subarraySum2(a []int, k int) int {
+	var count int
+	for i := 1; i < len(a); i++ {
+		a[i] += a[i-1]
+		
+	}
+	for i := 0; i < len(a); i++ {
+		if a[i] == k {
+			count++
+		}
+		for j := i + 1; j < len(a); j++ {
+			if a[j]-a[i] == k {
+				count++
+			}
+		}
+	}
+	return count
+}
