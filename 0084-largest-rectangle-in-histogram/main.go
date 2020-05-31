@@ -1,12 +1,38 @@
 package _084_largest_rectangle_in_histogram
 
 func largestRectangleArea(heights []int) int {
+	stack := make([]int, 0, len(heights))
+	stack = append(stack, -1)
+	maxArea := 0
+	last := len(stack) - 1
+	for i := 0; i < len(heights); i++ {
+		for stack[last] != -1 && heights[stack[last]] >= heights[i] {
+			h := heights[stack[last]]
+			stack = stack[:last]
+			last--
+			w := i - stack[last] - 1
+			maxArea = max(maxArea, h*w)
+		}
+		stack = append(stack, i)
+		last++
+	}
+	for stack[last] != -1 {
+		h := heights[stack[last]]
+		stack := stack[:last]
+		last--
+		w := len(heights) - stack[last] - 1
+		maxArea = max(maxArea, h*w)
+	}
+	return maxArea
+}
+
+func largestRectangleArea1(heights []int) int {
 	n := len(heights)
 	left, right := make([]int, n), make([]int, n)
 	for i := 0; i < n; i++ {
 		right[i] = n
 	}
-	// monoStack存放的是下标，下标对用的值是单调递增的
+	// monoStack存放的是下标，下标对应的值是单调递增的
 	var monoStack []int
 	for i := 0; i < n; i++ {
 		// 当前元素值比栈顶元素小
