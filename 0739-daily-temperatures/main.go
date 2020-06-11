@@ -4,20 +4,23 @@ import (
 	`math`
 )
 
-func dailyTemperatures(T []int) []int {
-	ans := make([]int, len(T))
-	var stack []int
-	index := -1
-	for i := len(T) - 1; i >= 0; i-- {
-		for len(stack) > 0 && T[i] >= T[stack[index]] {
-			stack = stack[:index]
-			index--
-		}
-		if index > -1 {
-			ans[i] = stack[index] - i
+/*
+维护单调递减栈
+当前温度比栈顶元素对应的温度高，则栈顶元素找到了第一个温度更高的天数，相减即为等待天数
+*/
+func dailyTemperatures(t []int) []int {
+	if len(t) == 0 {
+		return []int{}
+	}
+	var ans = make([]int, len(t))
+	var stack = make([]int, 0, len(t))
+	for i := 0; i < len(t); i++ {
+		for len(stack) > 0 && t[stack[len(stack)-1]] < t[i] {
+			j := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			ans[j] = i - j
 		}
 		stack = append(stack, i)
-		index++
 	}
 	return ans
 }
