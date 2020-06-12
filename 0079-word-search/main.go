@@ -48,3 +48,34 @@ func dfs(board [][]byte, i, j int, word string, k int) bool {
 	board[i][j] = tmp
 	return flag
 }
+
+func exist1(board [][]byte, word string) bool {
+	var dfs func(index int, i, j int) bool
+	dfs = func(index int, i, j int) bool {
+		if index == len(word) {
+			return true
+		}
+		if i < 0 || j < 0 || i >= len(board) || j >= len(board[i]) {
+			return false
+		}
+		if board[i][j] != word[index] {
+			return false
+		}
+		tmp := board[i][j]
+		board[i][j] = ' '
+		flag := dfs(index+1, i+1, j) ||
+			dfs(index+1, i-1, j) ||
+			dfs(index+1, i, j+1) ||
+			dfs(index+1, i, j-1)
+		board[i][j] = tmp
+		return flag
+	}
+	for i := range board {
+		for j := range board[i] {
+			if dfs(0, i, j) {
+				return true
+			}
+		}
+	}
+	return false
+}

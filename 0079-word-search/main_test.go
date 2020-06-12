@@ -47,6 +47,9 @@ func Test_exist(t *testing.T) {
 			if got := exist(tt.args.board, tt.args.word); got != tt.want {
 				t.Errorf("exist() = %v, want %v", got, tt.want)
 			}
+			if got := exist1(tt.args.board, tt.args.word); got != tt.want {
+				t.Errorf("exist()1 = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
