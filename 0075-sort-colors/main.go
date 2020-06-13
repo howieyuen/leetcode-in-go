@@ -1,16 +1,16 @@
 package _075_sort_colors
 
 func sortColors(nums []int) {
-	l := 0
-	r := len(nums) - 1
-	for i := 0; i <= r; i++ {
+	left := 0
+	right := len(nums) - 1
+	for i := 0; i < right; i++ {
 		if nums[i] == 0 {
-			nums[i], nums[l] = nums[l], nums[i]
-			l++
+			nums[i], nums[left] = nums[left], nums[i]
+			left++
 		} else if nums[i] == 2 {
-			nums[i], nums[r] = nums[r], nums[i]
+			nums[i], nums[right] = nums[right], nums[i]
 			i--
-			r--
+			right--
 		}
 	}
 }
