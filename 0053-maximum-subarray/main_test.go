@@ -17,8 +17,14 @@ func Test_maxSubArray(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := maxSubArray1(tt.args.nums); got != tt.want {
+			if got := maxSubArray(tt.args.nums); got != tt.want {
 				t.Errorf("maxSubArray() = %v, want %v", got, tt.want)
+			}
+			if got := maxSubArray1(tt.args.nums); got != tt.want {
+				t.Errorf("maxSubArray1() = %v, want %v", got, tt.want)
+			}
+			if got := maxSubArray2(tt.args.nums); got != tt.want {
+				t.Errorf("maxSubArray2() = %v, want %v", got, tt.want)
 			}
 		})
 	}
