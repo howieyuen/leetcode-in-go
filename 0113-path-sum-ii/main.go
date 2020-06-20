@@ -25,7 +25,7 @@ func dfs(root *TreeNode, target int, path []int, ans *[][]int) {
 	if root.Right != nil {
 		dfs(root.Right, target, path, ans)
 	}
-	target -= root.Val
+	target += root.Val
 	path = path[:len(path)-1]
 }
 
