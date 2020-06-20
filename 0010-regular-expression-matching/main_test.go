@@ -26,6 +26,9 @@ func Test_isMatch(t *testing.T) {
 			if got := isMatch(tt.args.s, tt.args.p); got != tt.want {
 				t.Errorf("isMatch() = %v, want %v", got, tt.want)
 			}
+			if got := isMatch1(tt.args.s, tt.args.p); got != tt.want {
+				t.Errorf("isMatch1() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }

@@ -29,3 +29,30 @@ func isMatch(s string, p string) bool {
 	}
 	return dp[n-1][m-1]
 }
+
+func isMatch1(s string, p string) bool {
+	if s == p {
+		return true
+	}
+	var match func(i, j int) bool
+	match = func(i, j int) bool {
+		if i >= len(s) && j >= len(p) {
+			return true
+		}
+		if i < len(s) && j >= len(p) {
+			return false
+		}
+		if j+1 < len(p) && p[j+1] == '*' {
+			if i < len(s) && (p[j] == s[i] || p[j] == '.') {
+				return match(i, j+2) || match(i+1, j)
+			} else {
+				return match(i, j+2)
+			}
+		}
+		if i < len(s) && (s[i] == p[j] || p[j] == '.') {
+			return match(i+1, j+1)
+		}
+		return false
+	}
+	return match(0, 0)
+}
