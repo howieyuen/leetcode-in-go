@@ -4,28 +4,23 @@ import (
 	"math"
 )
 
-/*
-	从一个节点到另一个节点的路径最大值
-*/
 func maxPathSum(root *TreeNode) int {
-	maxSum := math.MinInt64
-	maxGain(root, &maxSum)
-	return maxSum
-}
-
-/*
-	递归中更新最长路径
-	maxGain的返回值，是以当前节点为根出发，左子树和右子树的最大路径和
-*/
-func maxGain(root *TreeNode, maxSum *int) int {
-	if root == nil {
-		return 0
+	var maxPath = math.MinInt64
+	var bfs func(root *TreeNode) int
+	// bfs return root.Val for no children's TreeNode
+	bfs = func(root *TreeNode) int {
+		if root == nil {
+			return 0
+		}
+		// Val may be negative
+		left := max(bfs(root.Left), 0)
+		right := max(bfs(root.Right), 0)
+		curSum := left + right + root.Val
+		maxPath = max(maxPath, curSum)
+		return root.Val + max(left, right)
 	}
-	left := max(maxGain(root.Left, maxSum), 0)
-	right := max(maxGain(root.Right, maxSum), 0)
-	newPath := left + right + root.Val
-	*maxSum = max(*maxSum, newPath)
-	return root.Val + max(left, right)
+	bfs(root)
+	return maxPath
 }
 
 func max(x, y int) int {
