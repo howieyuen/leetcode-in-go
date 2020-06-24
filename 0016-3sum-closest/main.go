@@ -1,34 +1,39 @@
 package _016_3Sum_Closest
 
 import (
-	`math`
-	`sort`
+	"math"
+	"sort"
 )
 
 func threeSumClosest(nums []int, target int) int {
 	sort.Ints(nums)
-	closet := nums[0] + nums[1] + nums[2]
+	closest := nums[0] + nums[1] + nums[2]
 	for i := 0; i < len(nums)-2; i++ {
+		if i > 0 && nums[i] == nums[i-1] {
+			continue
+		}
 		left := i + 1
 		right := len(nums) - 1
 		for left < right {
 			min := nums[i] + nums[left] + nums[left+1]
 			if min > target {
-				if math.Abs(float64(min-target)) < math.Abs(float64(closet-target)) {
-					closet = min
+				if math.Abs(float64(min-target)) < math.Abs(float64(closest-target)) {
+					closest = min
+					break
 				}
-				break
 			}
+			
 			max := nums[i] + nums[right-1] + nums[right]
 			if max < target {
-				if math.Abs(float64(max-target)) < math.Abs(float64(closet-target)) {
-					closet = max
+				if math.Abs(float64(max-target)) < math.Abs(float64(closest-target)) {
+					closest = max
+					break
 				}
-				break
 			}
+			
 			cur := nums[i] + nums[left] + nums[right]
-			if math.Abs(float64(cur-target)) < math.Abs(float64(closet-target)) {
-				closet = cur
+			if math.Abs(float64(cur-target)) < math.Abs(float64(closest-target)) {
+				closest = cur
 			}
 			if cur == target {
 				return target
@@ -39,14 +44,11 @@ func threeSumClosest(nums []int, target int) int {
 				}
 			} else {
 				right--
-				if left < right && nums[right+1] == nums[right] {
+				for left < right && nums[right+1] == nums[right] {
 					right--
 				}
 			}
 		}
-		for i < len(nums)-2 && nums[i] == nums[i+1] {
-			i++
-		}
 	}
-	return closet
+	return closest
 }
