@@ -1,18 +1,31 @@
 package _041_first_missing_positive
 
 import (
-	`fmt`
-	`testing`
+	"testing"
 )
 
 func Test_firstMissingPositive(t *testing.T) {
-	var nums = []int{1, 2, 3}
-	fmt.Println(firstMissingPositive(nums))
-
-	nums = []int{3, 4, -1, 1}
-	fmt.Println(firstMissingPositive(nums))
-
-	nums = []int{7, 8, 9, 11, 12}
-	fmt.Println(firstMissingPositive(nums))
-
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{args: args{nums: []int{1, 1}}, want: 2},
+		{args: args{nums: []int{1, 2, 0}}, want: 3},
+		{args: args{nums: []int{3, 4, -1, 1}}, want: 2},
+		{args: args{nums: []int{7, 8, 9, 11, 12}}, want: 1},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := firstMissingPositive(tt.args.nums); got != tt.want {
+				t.Errorf("firstMissingPositive() = %v, want %v", got, tt.want)
+			}
+			if got := firstMissingPositive1(tt.args.nums); got != tt.want {
+				t.Errorf("firstMissingPositive1() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }

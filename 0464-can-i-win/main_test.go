@@ -1,4 +1,4 @@
-package _64_can_i_win
+package _464_can_i_win
 
 import (
 	"testing"

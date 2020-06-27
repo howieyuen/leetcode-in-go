@@ -1,4 +1,4 @@
-package _64_can_i_win
+package _464_can_i_win
 
 func canIWin(maxChoosableInteger int, desiredTotal int) bool {
 	// 第一种特殊情况，第一个人选一次即可到达预期值
