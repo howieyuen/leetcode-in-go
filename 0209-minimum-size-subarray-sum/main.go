@@ -1,26 +1,23 @@
 package _209_minimum_size_subarray_sum
 
-import (
-	`math`
-)
-
 func minSubArrayLen(s int, nums []int) int {
-	n := len(nums)
-	left := 0
-	ans := math.MaxInt32
+	var start, end int
+	minLen := len(nums) + 1
 	sum := 0
-	for i := 0; i < n; i++ {
-		sum += nums[i]
-		for sum >= s {
-			if ans > i-left+1 {
-				ans = i - left + 1
-			}
-			sum -= nums[left]
-			left++
+	for start < len(nums) {
+		if sum < s && end < len(nums) {
+			sum += nums[end]
+			end++
+		} else {
+			sum -= nums[start]
+			start++
+		}
+		if sum >= s && minLen > (end-start) {
+			minLen = end - start
 		}
 	}
-	if ans == math.MaxInt32 {
+	if minLen > len(nums) {
 		return 0
 	}
-	return ans
+	return minLen
 }
