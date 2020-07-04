@@ -1,26 +1,5 @@
 package main
 
-import (
-	`fmt`
-)
-
-/*
-最长回文子串
-*/
-
-func main() {
-	tests := []string{
-		"babad",
-		"abcdbbfcba",
-		"adx",
-	}
-	for _, tt := range tests {
-		fmt.Printf(longestPalindrome1(tt) + "\n")
-		fmt.Printf(longestPalindrome2(tt) + "\n")
-		fmt.Printf(longestPalindrome3(tt) + "\n")
-	}
-}
-
 /*
 中心扩展算法
 */
