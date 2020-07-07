@@ -1,5 +1,23 @@
 package _437_path_sum_iii
 
+func pathSum1(root *TreeNode, sum int) int {
+	if root == nil {
+		return 0
+	}
+	return dfs(root, sum) + pathSum1(root.Left, sum) + pathSum1(root.Right, sum)
+}
+
+func dfs(root *TreeNode, sum int) int {
+	if root == nil {
+		return 0
+	}
+	cnt := 0
+	if root.Val == sum {
+		cnt++
+	}
+	return cnt + dfs(root.Left, sum-root.Val) + dfs(root.Right, sum-root.Val)
+}
+
 func pathSum(root *TreeNode, sum int) int {
 	prefixCount := make(map[int]int)
 	prefixCount[0] = 1
