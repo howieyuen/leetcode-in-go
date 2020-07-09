@@ -30,6 +30,9 @@ func Test_minWindow(t *testing.T) {
 			if got := minWindow1(tt.args.s, tt.args.t); got != tt.want {
 				t.Errorf("minWindow1() = %v, want %v", got, tt.want)
 			}
+			if got := minWindow2(tt.args.s, tt.args.t); got != tt.want {
+				t.Errorf("minWindow2() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
