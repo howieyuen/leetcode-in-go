@@ -34,6 +34,9 @@ func Test_respace(t *testing.T) {
 			if got := respace(tt.args.dictionary, tt.args.sentence); got != tt.want {
 				t.Errorf("respace() = %v, want %v", got, tt.want)
 			}
+			if got := respace1(tt.args.dictionary, tt.args.sentence); got != tt.want {
+				t.Errorf("respace1() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
