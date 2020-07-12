@@ -4,6 +4,8 @@ import (
 	"sort"
 )
 
+// 操作三次，消除3个最大、消除3个最小、消除2个最大1个最小、消除1个最大2个最小
+// 最后4种情况选最优
 func minDifference(nums []int) int {
 	if len(nums) <= 4 {
 		return 0
