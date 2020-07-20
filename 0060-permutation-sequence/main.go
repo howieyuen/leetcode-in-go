@@ -30,6 +30,48 @@ func getPermutation(n int, k int) string {
 	return b.String()
 }
 
+func getPermutation2(n int, k int) string {
+	var nums = make([]int, n)
+	for i := range nums {
+		nums[i] = i + 1
+	}
+	
+	factorial := make([]int, n+1)
+	factorial[0] = 1
+	for i := 1; i <= n; i++ {
+		factorial[i] = factorial[i-1] * i
+	}
+	
+	var serial = make([]int, 0, n)
+	var used = make([]bool, n)
+	var dfs func(index int)
+	dfs = func(index int) {
+		if index == n {
+			return
+		}
+		num := factorial[n-index-1]
+		for i := 0; i < n; i++ {
+			if used[i] {
+				continue
+			}
+			if num < k {
+				k -= num
+				continue
+			}
+			serial = append(serial, nums[i])
+			used[i] = true
+			dfs(index + 1)
+		}
+	}
+	
+	dfs(0)
+	var b bytes.Buffer
+	for i := range serial {
+		b.WriteByte(byte(serial[i] + '0'))
+	}
+	return b.String()
+}
+
 func getPermutation1(n int, k int) string {
 	var input = make([]byte, n)
 	for i := 0; i < n; i++ {

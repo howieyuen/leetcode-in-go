@@ -30,6 +30,9 @@ func Test_getPermutation(t *testing.T) {
 			if got := getPermutation1(tt.args.n, tt.args.k); got != tt.want {
 				t.Errorf("getPermutation1() = %v, want %v", got, tt.want)
 			}
+			if got := getPermutation2(tt.args.n, tt.args.k); got != tt.want {
+				t.Errorf("getPermutation2() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
@@ -53,4 +56,3 @@ func Test_getAllPermutations(t *testing.T) {
 		})
 	}
 }
-
