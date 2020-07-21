@@ -1,4 +1,4 @@
-package _50_2_keys_keyboard
+package _650_2_keys_keyboard
 
 // 如果这个数是质数 则这个数只能一个一个的复制得到 操作步数就是这个数本身
 // 如果不是质数 则可以由复制得到

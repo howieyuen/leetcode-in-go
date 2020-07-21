@@ -1,4 +1,4 @@
-package _50_2_keys_keyboard
+package _650_2_keys_keyboard
 
 import (
 	"testing"

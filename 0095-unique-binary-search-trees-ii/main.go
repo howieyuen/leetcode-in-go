@@ -2,16 +2,16 @@ package _095_unique_binary_search_trees_ii
 
 func generateTrees(n int) []*TreeNode {
 	if n == 0 {
-		return []*TreeNode{}
+		return nil
 	}
 	return generateNode(1, n)
 }
 
 func generateNode(start, end int) []*TreeNode {
-	trees := []*TreeNode{}
+	var ans []*TreeNode
 	if start > end {
-		trees = append(trees, nil)
-		return trees
+		ans = append(ans, nil)
+		return ans
 	}
 	for i := start; i <= end; i++ {
 		leftSubTrees := generateNode(start, i-1)
@@ -23,11 +23,11 @@ func generateNode(start, end int) []*TreeNode {
 					Left:  left,
 					Right: right,
 				}
-				trees = append(trees, root)
+				ans = append(ans, root)
 			}
 		}
 	}
-	return trees
+	return ans
 }
 
 type TreeNode struct {
