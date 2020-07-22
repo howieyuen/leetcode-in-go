@@ -17,3 +17,21 @@ func minArray(numbers []int) int {
 	}
 	return numbers[i]
 }
+
+func minArray1(numbers []int) int {
+	left, right := 0, len(numbers)-1
+	if numbers[left] < numbers[right] {
+		return numbers[left]
+	}
+	for left < right {
+		mid := (left + right) / 2
+		if numbers[mid] > numbers[right] {
+			left = mid + 1
+		} else if numbers[left] > numbers[mid] {
+			right = mid
+		} else {
+			right--
+		}
+	}
+	return numbers[left]
+}
