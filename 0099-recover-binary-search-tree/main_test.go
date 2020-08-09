@@ -31,15 +31,19 @@ func Test_recoverTree(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
+		want *TreeNode
 	}{
 		{
 			args: args{root: root1},
+			want: root2,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			recoverTree(tt.args.root)
-			println(deepEquals(tt.args.root, root2))
+			// recoverTree(tt.args.root)
+			// recoverTree1(tt.args.root)
+			recoverTree2(tt.args.root)
+			println(deepEquals(tt.args.root, tt.want))
 		})
 	}
 }

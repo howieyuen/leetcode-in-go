@@ -1,9 +1,5 @@
 package _099_recover_binary_search_tree
 
-import (
-	"container/list"
-)
-
 /*
 二叉搜索树中的两个节点被错误地交换。
 
@@ -35,17 +31,15 @@ func findTwoSwapped(root *TreeNode) {
 }
 
 func recoverTree1(root *TreeNode) {
-	if root == nil {
-		return
-	}
-	stack := list.New()
+	var stack []*TreeNode
 	var x, y, pred *TreeNode
-	for stack.Len() > 0 || root != nil {
+	for len(stack) > 0 || root != nil {
 		for root != nil {
-			stack.PushBack(root)
+			stack = append(stack, root)
 			root = root.Left
 		}
-		root = stack.Remove(stack.Back()).(*TreeNode)
+		root = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
 		if pred != nil && root.Val < pred.Val {
 			y = root
 			if x == nil {
@@ -58,6 +52,56 @@ func recoverTree1(root *TreeNode) {
 		root = root.Right
 	}
 	x.Val, y.Val = y.Val, x.Val
+}
+
+func recoverTree2(root *TreeNode) {
+	var nums []int
+	var inorder func(node *TreeNode)
+	inorder = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		inorder(node.Left)
+		nums = append(nums, node.Val)
+		inorder(node.Right)
+	}
+	inorder(root)
+	x, y := findSwapped(nums)
+	recoverNode(root, 2, x, y)
+}
+
+func findSwapped(nums []int) (int, int) {
+	x, y := -1, -1
+	for i := 0; i < len(nums)-1; i++ {
+		if nums[i+1] < nums[i] {
+			y = nums[i+1]
+			if x == -1 {
+				x = nums[i]
+			} else {
+				break
+			}
+		}
+	}
+	return x, y
+}
+
+func recoverNode(root *TreeNode, count, x, y int) {
+	if root == nil {
+		return
+	}
+	if root.Val == x || root.Val == y {
+		if root.Val == x {
+			root.Val = y
+		} else {
+			root.Val = x
+		}
+		count--
+		if count == 0 {
+			return
+		}
+	}
+	recoverNode(root.Right, count, x, y)
+	recoverNode(root.Left, count, x, y)
 }
 
 type TreeNode struct {
