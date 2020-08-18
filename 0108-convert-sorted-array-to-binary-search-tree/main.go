@@ -1,17 +1,20 @@
 package _108_convert_sorted_array_to_binary_search_tree
 
 func sortedArrayToBST(nums []int) *TreeNode {
-	return sortedSliceToBST(nums, 0, len(nums)-1)
-}
-
-func sortedSliceToBST(nums []int, i, j int) *TreeNode {
-	if i > j {
+	if len(nums) == 0 {
 		return nil
 	}
-	mid := (i + j) / 2
-	root := &TreeNode{Val: nums[mid]}
-	root.Left = sortedSliceToBST(nums, i, mid-1)
-	root.Right = sortedSliceToBST(nums, mid+1, j)
+	if len(nums) == 1 {
+		return &TreeNode{
+			Val: nums[0],
+		}
+	}
+	var mid = len(nums)/2
+	var root = &TreeNode{
+		Val: nums[mid],
+		Left: sortedArrayToBST(nums[:mid]),
+		Right: sortedArrayToBST(nums[mid+1:]),
+	}
 	return root
 }
 
