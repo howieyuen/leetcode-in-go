@@ -24,3 +24,25 @@ func canVisitAllRooms(rooms [][]int) bool {
 	}
 	return true
 }
+
+func canVisitAllRooms1(rooms [][]int) bool {
+	if len(rooms) == 0 {
+		return true
+	}
+	
+	visited := make([]bool, len(rooms))
+	count := 0
+	var dfs func(i int)
+	dfs = func(i int) {
+		visited[i] = true
+		count++
+		for j := range rooms[i] {
+			if !visited[rooms[i][j]] {
+				dfs(rooms[i][j])
+			}
+		}
+	}
+	
+	dfs(0)
+	return count == len(rooms)
+}
