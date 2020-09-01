@@ -13,7 +13,12 @@ func isNumber(s string) bool {
 	if s == "" {
 		return false
 	}
-	if split := strings.Index(s, "e"); split != -1 {
+	split1 := strings.Index(s, "e")
+	split2 := strings.Index(s, "E")
+	if split1 != -1 && split2 != -1 {
+		return false
+	} else if split1 != -1 || split2 != -1 {
+		split := split1 + split2 + 1
 		left, right := s[:split], s[split+1:]
 		if len(left) == 0 || len(right) == 0 {
 			return false
@@ -24,7 +29,7 @@ func isNumber(s string) bool {
 		if withFlag(right) && len(right[1:]) == 0 {
 			return false
 		}
-		return allDigitsWithDot(s[:split]) && allDigitsWithFlag(s[split+1:])
+		return allDigitsWithDot(left) && allDigitsWithFlag(right)
 	}
 	return allDigitsWithDot(s)
 }
