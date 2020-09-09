@@ -4,34 +4,31 @@ import (
 	`sort`
 )
 
-var res [][]int
-
 func combinationSum2(candidates []int, target int) [][]int {
-	res = [][]int{}
 	sort.Ints(candidates)
-	dfs(candidates, []int{}, 0, 0, target)
-	return res
-}
-
-func dfs(candidates, ans []int, index, cur, target int) {
-	if cur == target {
-		var tmp []int
-		tmp = append(tmp, ans...)
-		res = append(res, tmp)
-		return
-	}
-	if index >= len(candidates) || cur > target {
-		return
-	}
-	for i := index; i < len(candidates); i++ {
-		if cur+candidates[i] > target {
-			break
+	var ans [][]int
+	var dfs func(index int, cur int, combination []int)
+	dfs = func(index int, cur int, combination []int) {
+		if cur == target {
+			tmp := make([]int, len(combination))
+			copy(tmp, combination)
+			ans = append(ans, tmp)
+			return
 		}
-		ans = append(ans, candidates[i])
-		dfs(candidates, ans, i+1, cur+candidates[i], target)
-		ans = ans[:len(ans)-1]
-		for i+1 < len(candidates) && candidates[i] == candidates[i+1] {
-			i++
+		for i := index; i < len(candidates); i++ {
+			if cur+candidates[i] > target {
+				break
+			}
+			cur += candidates[i]
+			combination = append(combination, candidates[i])
+			dfs(i+1, cur, combination)
+			combination = combination[:len(combination)-1]
+			cur -= candidates[i]
+			for i+1 < len(candidates) && candidates[i] == candidates[i+1] {
+				i++
+			}
 		}
 	}
+	dfs(0, 0, nil)
+	return ans
 }

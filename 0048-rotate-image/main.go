@@ -20,7 +20,7 @@ func rotate1(matrix [][]int) {
 	}
 	// 行反转
 	for i := 0; i < n; i++ {
-		for j := i; j < n/2; j++ {
+		for j := 0; j < n/2; j++ {
 			matrix[i][j], matrix[i][n-j-1] = matrix[i][n-j-1], matrix[i][j]
 		}
 	}
