@@ -30,3 +30,29 @@ func backtrace(candidates, combinations []int, index, current, target int, ans *
 		}
 	}
 }
+
+func combinationSum1(candidates []int, target int) [][]int {
+	sort.Ints(candidates)
+	var ans [][]int
+	var dfs func(index int, combination []int, cur int)
+	dfs = func(index int, combination []int, cur int) {
+		if cur == target {
+			tmp := make([]int, len(combination))
+			copy(tmp, combination)
+			ans = append(ans, tmp)
+			return
+		}
+		for i := index; i < len(candidates); i++ {
+			if cur+candidates[i] > target {
+				break
+			}
+			cur += candidates[i]
+			combination = append(combination, candidates[i])
+			dfs(i, combination, cur)
+			combination = combination[:len(combination)-1]
+			cur -= candidates[i]
+		}
+	}
+	dfs(0, nil, 0)
+	return ans
+}
