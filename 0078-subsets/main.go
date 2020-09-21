@@ -15,3 +15,24 @@ func subsets(nums []int) [][]int {
 	}
 	return res
 }
+
+func subsets1(nums []int) [][]int {
+	var ans [][]int
+	var backtrace func(index int, size int, cur []int)
+	backtrace = func(index int, size int, cur []int) {
+		if len(cur) == size {
+			tmp := make([]int, len(cur))
+			copy(tmp, cur)
+			ans = append(ans, tmp)
+		}
+		for i := index; i < len(nums); i++ {
+			cur = append(cur, nums[i])
+			backtrace(i+1, size, cur)
+			cur = cur[:len(cur)-1]
+		}
+	}
+	for i := 0; i <= len(nums); i++ {
+		backtrace(0, i, nil)
+	}
+	return ans
+}

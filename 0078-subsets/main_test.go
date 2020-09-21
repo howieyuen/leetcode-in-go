@@ -33,6 +33,9 @@ func Test_subsets(t *testing.T) {
 			if got := subsets(tt.args.nums); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("subsets() = %v, want %v", got, tt.want)
 			}
+			if got := subsets1(tt.args.nums); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("subsets1() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
