@@ -75,9 +75,6 @@ func trap3(height []int) int {
 	for i := range height {
 		for stack.Len() > 0 && height[i] > height[stack.Back().Value.(int)] {
 			bottomIndex := stack.Remove(stack.Back()).(int)
-			for stack.Len() > 0 && height[bottomIndex] == height[stack.Back().Value.(int)] {
-				stack.Remove(stack.Back())
-			}
 			if stack.Len() > 0 {
 				leftIndex := stack.Back().Value.(int)
 				ans += (min(height[i], height[leftIndex]) - height[bottomIndex]) * (i - leftIndex - 1)
