@@ -27,6 +27,47 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	return head.Next
 }
 
+func addTwoNumbers1(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil {
+		return l2
+	}
+	if l2 == nil {
+		return l1
+	}
+	var faker = &ListNode{Val: -1}
+	p := faker
+	var carry int
+	for l1 != nil && l2 != nil {
+		val := l1.Val + l2.Val + carry
+		carry = val / 10
+		val %= 10
+		p.Next = &ListNode{Val: val}
+		p = p.Next
+		l1 = l1.Next
+		l2 = l2.Next
+	}
+	for l1 != nil {
+		val := l1.Val + carry
+		carry = val / 10
+		val %= 10
+		p.Next = &ListNode{Val: val}
+		p = p.Next
+		l1 = l1.Next
+	}
+	for l2 != nil {
+		val := l2.Val + carry
+		carry = val / 10
+		val %= 10
+		p.Next = &ListNode{Val: val}
+		p = p.Next
+		l2 = l2.Next
+	}
+	if carry != 0 {
+		p.Next = &ListNode{Val: carry}
+	}
+	return faker.Next
+}
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
