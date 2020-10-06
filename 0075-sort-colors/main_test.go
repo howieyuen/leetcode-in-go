@@ -21,6 +21,9 @@ func Test_sortColors(t *testing.T) {
 			if sortColors(tt.args.nums); !reflect.DeepEqual(tt.args.nums, tt.args.want) {
 				t.Errorf("got: %v, want: %v", tt.args.nums, tt.args.want)
 			}
+			if sortColors1(tt.args.nums); !reflect.DeepEqual(tt.args.nums, tt.args.want) {
+				t.Errorf("got: %v, want: %v", tt.args.nums, tt.args.want)
+			}
 		})
 	}
 }
