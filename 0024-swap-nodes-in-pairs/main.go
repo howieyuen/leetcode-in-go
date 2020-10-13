@@ -26,6 +26,23 @@ func swapPairs1(head *ListNode) *ListNode {
 	return pre.Next
 }
 
+func swapPairs2(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	var fakerHead = new(ListNode)
+	fakerHead.Next = head
+	pre, cur := fakerHead, head
+	for cur != nil && cur.Next != nil {
+		pre.Next = cur.Next
+		cur.Next = cur.Next.Next
+		pre.Next.Next = cur
+		pre = cur
+		cur = cur.Next
+	}
+	return fakerHead.Next
+}
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
