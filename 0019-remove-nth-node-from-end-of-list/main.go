@@ -16,6 +16,22 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	return t.Next
 }
 
+func removeNthFromEnd1(head *ListNode, n int) *ListNode {
+	var faker = new(ListNode)
+	faker.Next = head
+	pre := head
+	cur := head
+	for i := 0; i < n; i++ {
+		cur = cur.Next
+	}
+	for cur != nil {
+		cur = cur.Next
+		pre = pre.Next
+	}
+	pre.Next = pre.Next.Next
+	return faker.Next
+}
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
