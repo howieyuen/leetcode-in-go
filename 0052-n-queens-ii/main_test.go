@@ -20,6 +20,12 @@ func Test_totalNQueens(t *testing.T) {
 			if got := totalNQueens(tt.args.n); got != tt.want {
 				t.Errorf("totalNQueens() = %v, want %v", got, tt.want)
 			}
+			if got := totalNQueens1(tt.args.n); got != tt.want {
+				t.Errorf("totalNQueens1() = %v, want %v", got, tt.want)
+			}
+			if got := totalNQueens2(tt.args.n); got != tt.want {
+				t.Errorf("totalNQueens2() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
