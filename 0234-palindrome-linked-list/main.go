@@ -63,6 +63,41 @@ func reverse(head *ListNode) *ListNode {
 	return prev
 }
 
+func isPalindrome2(head *ListNode) bool {
+	if head == nil || head.Next == nil {
+		return true
+	}
+	
+	head2 := func(head *ListNode) *ListNode {
+		// get mid
+		var p, q = head, head
+		for q.Next != nil && q.Next.Next != nil {
+			p = p.Next
+			q = q.Next.Next
+		}
+		// reverse
+		var pre *ListNode
+		var cur = p
+		for cur != nil {
+			next := cur.Next
+			cur.Next = pre
+			pre = cur
+			cur = next
+		}
+		return pre
+	}(head)
+	
+	head1 := head
+	for head1 != nil && head2 != nil {
+		if head1.Val != head2.Val {
+			return false
+		}
+		head1 = head1.Next
+		head2 = head2.Next
+	}
+	return true
+}
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
