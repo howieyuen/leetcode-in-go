@@ -17,6 +17,14 @@ func Test_wordBreak(t *testing.T) {
 	}{
 		{
 			args: args{
+				s: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+				wordDict: []string{"a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa",
+					"aaaaaaaaa", "aaaaaaaaaa"},
+			},
+			want: nil,
+		},
+		{
+			args: args{
 				s:        "catsanddog",
 				wordDict: []string{"cat", "cats", "and", "sand", "dog"},
 			},
@@ -34,11 +42,14 @@ func Test_wordBreak(t *testing.T) {
 				s:        "catsandog",
 				wordDict: []string{"cats", "dog", "sand", "and", "cat"},
 			},
-			want: []string{},
+			want: nil,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			if got := wordBreak2(tt.args.s, tt.args.wordDict); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("wordBreak2() = %v, want %v", got, tt.want)
+			}
 			if got := wordBreak(tt.args.s, tt.args.wordDict); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("wordBreak() = %v, want %v", got, tt.want)
 			}
