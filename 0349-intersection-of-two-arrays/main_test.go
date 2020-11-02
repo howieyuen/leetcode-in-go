@@ -28,6 +28,9 @@ func Test_intersection(t *testing.T) {
 			if got := intersection(tt.args.nums1, tt.args.nums2); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("intersection() = %v, want %v", got, tt.want)
 			}
+			if got := intersection1(tt.args.nums1, tt.args.nums2); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("intersection1() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
