@@ -90,3 +90,45 @@ func compare(start, end string) bool {
 	}
 	return diff == 1
 }
+
+func ladderLength2(beginWord string, endWord string, wordList []string) int {
+	var dict = make(map[string]bool)
+	for i := range wordList {
+		dict[wordList[i]] = true
+	}
+	if !dict[endWord] {
+		return 0
+	}
+
+	beginSet := map[string]bool{beginWord: true}
+	endSet := map[string]bool{endWord: true}
+	var ans = 1
+	for len(beginSet) > 0 {
+		ans++
+		for begin := range beginSet {
+			delete(dict, begin)
+		}
+		var tmpSet = make(map[string]bool)
+		for begin := range beginSet {
+			for i := 0; i < len(begin); i++ {
+				for c := 'a'; c <= 'z'; c++ {
+					next := begin[:i] + string(c) + begin[i+1:]
+					if !dict[next] {
+						continue
+					}
+					if endSet[next] {
+						return ans
+					}
+					tmpSet[next] = true
+				}
+			}
+		}
+		if len(tmpSet) < len(endSet) {
+			beginSet = tmpSet
+		} else {
+			beginSet = endSet
+			endSet = tmpSet
+		}
+	}
+	return 0
+}
