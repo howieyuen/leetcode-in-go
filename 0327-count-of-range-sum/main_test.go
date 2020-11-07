@@ -1,0 +1,30 @@
+package _327_count_of_range_sum
+
+import (
+	"testing"
+)
+
+func Test_countRangeSum(t *testing.T) {
+	type args struct {
+		nums  []int
+		lower int
+		upper int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{args: args{nums: []int{-2, 5, -1}, lower: -2, upper: 2}, want: 3},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := countRangeSum(tt.args.nums, tt.args.lower, tt.args.upper); got != tt.want {
+				t.Errorf("countRangeSum() = %v, want %v", got, tt.want)
+			}
+			if got := countRangeSum1(tt.args.nums, tt.args.lower, tt.args.upper); got != tt.want {
+				t.Errorf("countRangeSum1() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
