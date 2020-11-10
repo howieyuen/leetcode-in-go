@@ -6,9 +6,9 @@ import (
 )
 
 func Test_nextPermutation(t *testing.T) {
-	nums := []int{1, 2, 3}
+	nums := []int{1, 2, 3, 4, 5}
 	for i := 0; i < 6; i++ {
-		nextPermutation(nums)
+		nextPermutation1(nums)
 		fmt.Println(nums)
 	}
 }
