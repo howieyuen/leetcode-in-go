@@ -62,9 +62,6 @@ func allCellsDistOrder1(R int, C int, r0 int, c0 int) [][]int {
 		queue = queue[1:]
 		r := point[0]
 		c := point[1]
-		if r < 0 || c < 0 || r >= R || c >= C {
-			continue
-		}
 		if visited[r][c] {
 			continue
 		}
