@@ -1,5 +1,7 @@
 package _034_find_first_and_last_position_of_element_in_sorted_array
 
+import "sort"
+
 /*
 	在排序数组中搜索元素出现的第一个位置和最后位置，要求时间复杂度为O(log n)
 	1. 二分查找元素的位置index，
@@ -38,4 +40,13 @@ func binarySearch(nums []int, start, end, target int) int {
 		}
 	}
 	return -1
+}
+
+func searchRange1(nums []int, target int) []int {
+	leftMost := sort.SearchInts(nums, target)
+	if leftMost == len(nums) || nums[leftMost] != target {
+		return []int{-1, -1}
+	}
+	rightMost := sort.SearchInts(nums, target+1) - 1
+	return []int{leftMost, rightMost}
 }
