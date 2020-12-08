@@ -33,3 +33,45 @@ func splitIntoFibonacci(S string) []int {
 	dfs(0, 0, 0, 0)
 	return ans
 }
+
+func splitIntoFibonacci1(s string) []int {
+	n := len(s)
+	var ans []int
+	var backtrace func(index, prev, sum int) bool
+	backtrace = func(index, prev, sum int) bool {
+		if index == n {
+			return len(ans) >= 3
+		}
+		cur := 0
+		for i := index; i < n; i++ {
+			// 首位不能为0
+			if i > index && s[index] == '0' {
+				break
+			}
+			// 位数递增
+			cur = cur*10 + int(s[i]-'0')
+			// 超过最大值
+			if cur > math.MaxInt32 {
+				break
+			}
+			if len(ans) >= 2 {
+				if cur < sum {
+					continue
+				}
+				// 超过sum
+				if cur > sum {
+					break
+				}
+			}
+			// 走到这里，说明cur = sum
+			ans = append(ans, cur)
+			if backtrace(i+1, cur, prev+cur) {
+				return true
+			}
+			ans = ans[:len(ans)-1]
+		}
+		return false
+	}
+	backtrace(0, 0, 0)
+	return ans
+}

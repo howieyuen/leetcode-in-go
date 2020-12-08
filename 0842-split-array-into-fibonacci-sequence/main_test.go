@@ -25,6 +25,9 @@ func Test_splitIntoFibonacci(t *testing.T) {
 			if got := splitIntoFibonacci(tt.args.S); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("splitIntoFibonacci() = %v, want %v", got, tt.want)
 			}
+			if got := splitIntoFibonacci1(tt.args.S); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("splitIntoFibonacci1() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
