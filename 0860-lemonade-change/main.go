@@ -31,3 +31,30 @@ func lemonadeChange(bills []int) bool {
 	}
 	return true
 }
+
+func lemonadeChange1(bills []int) bool {
+	var five, ten int
+	for _, b := range bills {
+		switch b {
+		case 5:
+			five++
+		case 10:
+			if five > 0 {
+				five--
+				ten++
+			} else {
+				return false
+			}
+		case 20:
+			if ten > 0 && five > 0 {
+				ten--
+				five--
+			} else if five >= 3 {
+				five -= 3
+			} else {
+				return false
+			}
+		}
+	}
+	return true
+}
