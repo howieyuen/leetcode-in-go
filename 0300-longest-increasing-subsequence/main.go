@@ -55,3 +55,33 @@ func max(x, y int) int {
 	}
 	return y
 }
+
+func lengthOfLIS2(nums []int) int {
+	n := len(nums)
+	if n == 0 {
+		return 0
+	}
+	var d = make([]int, n+1)
+	length := 1
+	d[length] = nums[0]
+	for i := 1; i < n; i++ {
+		if nums[i] > d[length] {
+			length++
+			d[length] = nums[i]
+		} else {
+			l, r := 1, length
+			pos := 0
+			for l <= r {
+				m := (l + r) / 2
+				if d[m] < nums[i] {
+					pos = m
+					l = m + 1
+				} else {
+					r = m - 1
+				}
+			}
+			d[pos+1] = nums[i]
+		}
+	}
+	return length
+}
