@@ -30,7 +30,7 @@ func containsNearbyAlmostDuplicate(nums []int, k int, t int) bool {
 
 func abs(data int) int {
 	if data < 0 {
-		return -1 * data
+		return -data
 	}
 	return data
 }
