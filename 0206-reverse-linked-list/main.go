@@ -24,8 +24,19 @@ func reverseList1(head *ListNode) *ListNode {
 	return p
 }
 
-// 1->2->3->4->5->NULL
-// 2  1  3  4  5
+func reverseList2(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	var newHead *ListNode
+	for head != nil {
+		next := head.Next
+		head.Next = newHead
+		newHead = head
+		head = next
+	}
+	return newHead
+}
 
 type ListNode struct {
 	Val  int
