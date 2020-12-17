@@ -1,7 +1,6 @@
 package _297_serialize_and_deserialize_binary_tree
 
 import (
-	"container/list"
 	"fmt"
 	"strconv"
 	"strings"
@@ -20,50 +19,44 @@ func Constructor() Codec {
 	return Codec{}
 }
 
-// Serializes a tree to a single string.
 func (c *Codec) serialize(root *TreeNode) string {
 	if root == nil {
 		return ""
 	}
-	return serialize(root)
+	var dfs func(root *TreeNode) string
+	dfs = func(root *TreeNode) string {
+		if root == nil {
+			return "null,"
+		}
+		str := strconv.Itoa(root.Val) + ","
+		str += dfs(root.Left)
+		str += dfs(root.Right)
+		return str
+	}
+	res := dfs(root)
+	return res[:len(res)-1]
 }
 
-func serialize(root *TreeNode) string {
-	if root == nil {
-		return "null,"
+func (c *Codec) deserialize(str string) *TreeNode {
+	if str == "" {
+		return nil
 	}
-	str := strconv.Itoa(root.Val) + ","
-	str += serialize(root.Left)
-	str += serialize(root.Right)
-	return str
-}
+	list := strings.Split(str, ",")
 
-// Deserialize your encoded data to tree.
-func (c *Codec) deserialize(data string) *TreeNode {
-	if data == "" {
-		return nil
+	var dfs func() *TreeNode
+	dfs = func() *TreeNode {
+		if list[0] == "null" {
+			list = list[1:]
+			return nil
+		}
+		val, _ := strconv.Atoi(list[0])
+		list = list[1:]
+		root := &TreeNode{Val: val}
+		root.Left = dfs()
+		root.Right = dfs()
+		return root
 	}
-	values := strings.Split(data, ",")
-	queue := list.New()
-	for i := range values {
-		queue.PushBack(values[i])
-	}
-	return buildTree(queue)
-}
-
-func buildTree(queue *list.List) *TreeNode {
-	if queue.Len() == 0 {
-		return nil
-	}
-	str := queue.Remove(queue.Front()).(string)
-	if str == "null" {
-		return nil
-	}
-	val, _ := strconv.Atoi(str)
-	root := &TreeNode{Val: val}
-	root.Left = buildTree(queue)
-	root.Right = buildTree(queue)
-	return root
+	return dfs()
 }
 
 func (c *Codec) serialize1(root *TreeNode) string {
@@ -71,7 +64,7 @@ func (c *Codec) serialize1(root *TreeNode) string {
 		return ""
 	}
 	queue := []*TreeNode{root}
-	data := []string{}
+	var data []string
 	for len(queue) > 0 {
 		root = queue[0]
 		queue = queue[1:]
@@ -116,7 +109,6 @@ func (c *Codec) deserialize1(data string) *TreeNode {
 			node.Left = &TreeNode{Val: leftVal}
 			queue = append(queue, node.Left)
 		}
-		
 		if i++; i >= len(vals) {
 			break
 		}

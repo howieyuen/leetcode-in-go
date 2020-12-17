@@ -15,7 +15,10 @@ var root = &TreeNode{
 	},
 }
 
-var want = "[1,2,3,null,null,4,5]"
+var c = Constructor()
+
+// var want = "[1,2,3,null,null,4,5]"
+var want = "[1,2,3,null,null,4,5,null,null,null,null]"
 
 func Test_serialize(t *testing.T) {
 	type args struct {
@@ -33,7 +36,7 @@ func Test_serialize(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := serialize(tt.args.root); got != tt.want {
+			if got := c.serialize1(tt.args.root); got != tt.want {
 				t.Errorf("serialize() = %v, want %v", got, tt.want)
 			}
 		})
@@ -56,7 +59,7 @@ func Test_deserialize(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := deserialize(tt.args.data); !reflect.DeepEqual(got, tt.want) {
+			if got := c.deserialize1(tt.args.data); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("deserialize() = %v, want %v", got, tt.want)
 			}
 		})
