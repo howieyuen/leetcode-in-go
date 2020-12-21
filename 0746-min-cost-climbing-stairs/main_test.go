@@ -27,6 +27,9 @@ func Test_minCostClimbingStairs(t *testing.T) {
 			if got := minCostClimbingStairs(tt.args.cost); got != tt.want {
 				t.Errorf("minCostClimbingStairs() = %v, want %v", got, tt.want)
 			}
+			if got := minCostClimbingStairs1(tt.args.cost); got != tt.want {
+				t.Errorf("minCostClimbingStairs1() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
