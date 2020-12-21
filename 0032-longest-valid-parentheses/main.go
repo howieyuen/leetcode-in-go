@@ -67,3 +67,28 @@ func maxInt(a, b int) int {
 	}
 	return b
 }
+
+func longestValidParentheses2(s string) int {
+	var res int
+	// dp[i]表示以下标 ii 字符结尾的最长有效括号的长度
+	var dp = make([]int, len(s))
+	for i := 1; i < len(s); i++ {
+		if s[i] == ')' {
+			if s[i-1] == '(' {
+				if i >= 2 {
+					dp[i] = dp[i-2] + 2
+				} else {
+					dp[i] = 2
+				}
+			} else if i-dp[i-1] > 0 && s[i-dp[i-1]-1] == '(' {
+				if i-dp[i-1] >= 2 {
+					dp[i] = dp[i-dp[i-1]-1] + dp[i-1] + 2
+				} else {
+					dp[i] = dp[i-1] + 2
+				}
+			}
+		}
+		res = maxInt(res, dp[i])
+	}
+	return res
+}
