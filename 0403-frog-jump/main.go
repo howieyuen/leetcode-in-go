@@ -17,6 +17,7 @@ func canCross(stones []int) bool {
 	for i := 1; i < n; i++ {
 		for j := 0; j < i; j++ {
 			k := stones[i] - stones[j]
+			// 从stones[j]跳到stones[i]位置，k最大就是stones[j]+1
 			if k <= j+1 {
 				dp[i][k] = dp[j][k-1] || dp[j][k] || dp[j][k+1]
 				if i == n-1 && dp[i][k] {
