@@ -18,4 +18,3 @@ func candy(ratings []int) int {
 	}
 	return sum
 }
-

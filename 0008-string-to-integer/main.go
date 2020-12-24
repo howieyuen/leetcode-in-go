@@ -1,8 +1,7 @@
-package _008_String_to_Integer
+package main
 
-const (
-	Int32MaxValue = int(^uint32(0) >> 1)
-	Int32MinValue = ^Int32MaxValue
+import (
+	"math"
 )
 
 func myAtoi(str string) int {
@@ -26,11 +25,11 @@ func myAtoi(str string) int {
 			}
 		} else {
 			if str[i] >= '0' && str[i] <= '9' {
-				if flag == 1 && (ans > Int32MaxValue/10 || (ans == Int32MaxValue/10 && str[i] > '7')) {
-					return Int32MaxValue
+				if flag == 1 && (ans > math.MaxInt32/10 || (ans == math.MaxInt32/10 && str[i] > '7')) {
+					return math.MaxInt32
 				}
-				if flag == -1 && (ans > Int32MaxValue/10 || (ans == Int32MaxValue/10 && str[i] > '8')) {
-					return Int32MinValue
+				if flag == -1 && (ans > math.MaxInt32/10 || (ans == math.MaxInt32/10 && str[i] > '8')) {
+					return math.MinInt32
 				}
 				ans = ans*10 + int(str[i]-'0')
 			} else {

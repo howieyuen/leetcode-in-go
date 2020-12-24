@@ -1,10 +1,7 @@
 package main
 
 import (
-	`fmt`
-	`testing`
-
-	`LeetCode-In-Go`
+	"testing"
 )
 
 func Test_myAtoi(t *testing.T) {
@@ -75,14 +72,9 @@ func Test_myAtoi(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := LeetCode_In_Go.myAtoi(tt.args.str); got != tt.want {
+			if got := myAtoi(tt.args.str); got != tt.want {
 				t.Errorf("myAtoi() = %v, want %v", got, tt.want)
 			}
 		})
 	}
-}
-
-func Test(t *testing.T) {
-	fmt.Println(LeetCode_In_Go.Int32MaxValue)
-	fmt.Println(LeetCode_In_Go.Int32MinValue)
 }
