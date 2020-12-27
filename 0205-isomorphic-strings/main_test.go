@@ -41,6 +41,9 @@ func Test_isIsomorphic(t *testing.T) {
 			if got := isIsomorphic(tt.args.s, tt.args.t); got != tt.want {
 				t.Errorf("isIsomorphic() = %v, want %v", got, tt.want)
 			}
+			if got := isIsomorphic1(tt.args.s, tt.args.t); got != tt.want {
+				t.Errorf("isIsomorphic1() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
