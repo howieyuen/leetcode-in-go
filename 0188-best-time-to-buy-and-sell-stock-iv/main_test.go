@@ -22,6 +22,9 @@ func Test_maxProfit(t *testing.T) {
 			if got := maxProfit(tt.args.k, tt.args.prices); got != tt.want {
 				t.Errorf("maxProfit() = %v, want %v", got, tt.want)
 			}
+			if got := maxProfit1(tt.args.k, tt.args.prices); got != tt.want {
+				t.Errorf("maxProfit1() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
