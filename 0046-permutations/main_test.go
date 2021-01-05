@@ -31,6 +31,9 @@ func Test_permute(t *testing.T) {
 			if got := permute(tt.args.nums); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("permute() = %v, want %v", got, tt.want)
 			}
+			if got := permute1(tt.args.nums); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("permute1() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
